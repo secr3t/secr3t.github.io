@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+	<meta charset="utf-8">
+
+	
+
+	<title>Dev.secr3t</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+	
+	
+	<link rel="stylesheet" href="/css/normalize.css" type="text/css">
+	<link rel="stylesheet" href="/css/basscss.css" type="text/css">
+	<link rel="stylesheet" href="/css/basscss-ui-groups.css" type="text/css">
+	<link rel="stylesheet" href="/css/tomorrow.css" type="text/css">
+	<link rel="stylesheet" href="/css/style.css" type="text/css">
+	
+		<link href="https://rachel.objectstore.co/dist/fonts/lato-v13/lato-v13-all.css" rel="stylesheet" type="text/css">
+	
+	
+
+	<!--[if lt IE 9]><script src="/js/html5.js" type="text/javascript"></script><![endif]-->
+	<script src="/js/main.js" type="text/javascript"></script>
+</head>
+</html>
+<body>
+	<section class="container m4 clearfix">
+		<div class="clearfix">
+			<div class="mb4 sm-flex center nowrap">
+	<div class="flex-auto block">
+		<p class="inline h2 author">Dev.secr3t</p> | <small class="muted">Secr3t</small>
+	</div>
+</div>
+
+			<div class="mn1 center">
+	
+		<a href="/./" class="btn button-narrow">Home</a>
+	
+		<a href="/archives/" class="btn button-narrow">Archives</a>
+	
+		<a href="/tag/" class="btn button-narrow">Tags</a>
+	
+	<a href="/search.html" class="btn button-narrow" onclick="loadJQuery(this, event);" data-modal="">
+		<svg class="icon" data-icon="search"/>
+	</a>
+</div>
+
+			<div class="p0 col col-12">
+				<div class="mt2 p0">
+	<span class="btn button-narrow">Tags</span>
+	<svg class="icon gray" data-icon="chevron-right"/>
+	<span class="btn button-narrow">hexo</span>
+</div>
+
+	<div class="m0 py2">
+	<div class="md-col-12">
+		<div class="overflow-hidden bg-white rounded">
+			<div class="m1 p2 white">
+				<div class="clearfix">
+					<div class="left">
+						<h1 class="h2 m0"><a href="/hexo/2018/10/24/be-friendly-with-hexo.secr3t/" class="black">
+						be-friendly-with-hexo
+						</a></h1>
+					</div>
+					<div class="right"><span class="h6 muted black">
+						10월 24 2018
+					</span></div>
+				</div>
+			</div>
+			<div class="p2 border-top">
+				<p>#Hexo와 친해지기</p>
+<h2 id="Hexo란"><a href="#Hexo란" class="headerlink" title="Hexo란?"></a>Hexo란?</h2><p><a href="https://hexo.io/docs/" target="_blank" rel="noopener">Hexo 소개 페이지</a> 를 보면 빠르고 단순하며 게다가 강력하기까지한 blog framework라고 소개하고 있다.<br><img src="https://api-storage.cloud.toast.com/v1/AUTH_41e5ded7cb95443f8d36cff82c6e76b3/github.io-storage/imgs/hexo-document-captured.PNG" alt="hexo introduce in hexo document"><br>Markdown (혹은 다른 언어)로 posting을 진행할 수 있다고 하는데, 좀 더 소개하자면 <a href="https://jekyllrb-ko.github.io/" target="_blank" rel="noopener">Jekyll</a> <del>(한국인이기 때문에 ko page를 링크해두었다.)</del> 은 Ruby를 주언어로 사용하는데에 반해 Hexo는 node.js를 주언어로 삼고 있다.<br>구성 파일을 보면 <a href="http://ejs.co/" target="_blank" rel="noopener">ejs</a>가 들어있는 것도 그 이유다.</p>
+<h2 id="Ejs란"><a href="#Ejs란" class="headerlink" title="Ejs란?"></a>Ejs란?</h2><p>간단하게 해당 이미지를 보고 가는게 좋을 것 같다.<br><img src="https://api-storage.cloud.toast.com/v1/AUTH_41e5ded7cb95443f8d36cff82c6e76b3/github.io-storage/imgs/ejs-firstpage-captured.PNG" alt="ejs description in ejs.co"><br>ejs.co로 접속해보면 해당 문구를 발견할 수 있는데, 풀이해보면 EJS는 plain JavaScript와 함께 HTML을 만들어내는 단순한 템플릿 언어라고 한다. 이와 비슷하게 php, jsp, asp 정도가 있을 것이다.</p>
+<h2 id="Hexo의-동작"><a href="#Hexo의-동작" class="headerlink" title="Hexo의 동작"></a>Hexo의 동작</h2><p>post 하나를 만들어내본 후 이해한 바로는 이러한 방식으로 동작하는 것이다.</p>
+<ol>
+<li>Markdown 파일 생성</li>
+<li>ejs를 통한 렌더링</li>
+</ol>
+<p><img src="https://api-storage.cloud.toast.com/v1/AUTH_41e5ded7cb95443f8d36cff82c6e76b3/github.io-storage/imgs/its-so-easy.png" alt="참 쉽죠?"></p>
+<p>그러면, github.io로와의 연동은 어떻게 되느냐..?</p>
+<p>위와 비슷합니다.</p>
+<ol>
+<li>Markdown 파일 생성</li>
+<li>ejs를 통한 렌더링</li>
+<li>렌더링된 html 파일을 정적 파일로 저장</li>
+<li>deploy</li>
+</ol>
+<p><img src="https://api-storage.cloud.toast.com/v1/AUTH_41e5ded7cb95443f8d36cff82c6e76b3/github.io-storage/imgs/wtf.gif" alt="wtf?!"></p>
+<p>정말로 이렇게 간단할까..? 하는 의문이 생긴다면 직접 해보시길 바랍니다.</p>
+
+			</div>
+			<div class="p2 border-top">
+				<div class="clearfix">
+					<div class="left">
+						
+							<script type="text/javascript">
+								document.write('<a href="/tag/hexo/" class="muted h6 mb1 bold btn btn-outline '+chooseOne(colors)+'">hexo</a>');
+								//document.write('<span onclick="window.location=\'' + ' /tag/hexo/ ' + '\'" class="clickable h6 bold inline-block px1 '+chooseOne(colors)+' rounded">hexo</span>');
+							</script>
+						
+					</div>
+					<div class="ml2 right"><span class="h6 muted black">
+						<a class="link" href="/categories/hexo/">hexo</a>
+					 </span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+
+
+<div class="clearfix">
+	
+	
+	<div class="overflow-hidden sm-show center">
+		
+			<a href="/tag/hexo/" class="btn btn-primary bg-gray">1</a>
+		
+		
+		
+			
+		
+			
+		
+		
+		
+			
+		
+			
+		
+
+		
+
+		
+	</div>
+</div>
+
+
+			</div>
+		</div>
+	</section>
+	<div class="container mb2 clearfix">
+    <div class="sm-flex center nowrap mb2 h5">
+        <div class="flex-auto border-bottom">
+           Powered by
+            <a href="https://hexo.io/" class="btn block ">Hexo</a>
+        </div>
+        <div class="flex-auto border-bottom">
+           Original Theme
+            <a href="https://zllovesuki.git.sx/essays/2016/02/hexo-theme-weightless/" class="btn block ">Weightless</a>
+        </div>
+        <div class="flex-auto border-bottom">
+            Owner <a href="mailto:dev.secr3t@gmail.com?subject=qna-to-dev_secr3t" class="btn block author ">Dev.secr3t</a>
+        </div>
+        <div class="flex-auto border-bottom">
+            FONT <a href="https://github.com/naver/d2codingfont" class="btn block green ">Naver D2Coding</a>
+        </div>
+        
+    </div>
+</div>
+<script src="/js/geomicons.js"></script>
+<script type="text/javascript">
+    var icons = document.querySelectorAll('[data-icon]');
+    geomicons.inject(icons);
+
+</script>
+
+
+
+
+</body>
+</html>
