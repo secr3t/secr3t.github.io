@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'D2Coding';
+  src: url('D2Coding.woff') format('woff'),
+       url('D2Coding.ttf') format('truetype'),
+       url('D2Coding.woff2') format('woff2'),
+       url('D2Coding.eot') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'D2Coding-Bold';
+  src: url('D2CodingBold.woff') format('woff'),
+       url('D2CodingBold.ttf') format('truetype'),
+       url('D2CodingBold.woff2') format('woff2'),
+       url('D2CodingBold.eot') format('embedded-opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: fallback;
+}

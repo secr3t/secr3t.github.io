@@ -6,6 +6,7 @@
        url('D2Coding.eot') format('embedded-opentype');
   font-weight: normal;
   font-style: normal;
+  font-display: fallback;
 }
 
 @font-face {
@@ -16,6 +17,7 @@
        url('D2CodingBold.eot') format('embedded-opentype');
   font-weight: bold;
   font-style: normal;
+  font-display: fallback;
 }
 
 * {
