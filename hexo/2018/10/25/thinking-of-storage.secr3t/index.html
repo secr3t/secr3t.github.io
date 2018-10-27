@@ -50,13 +50,11 @@
 	
 		<a href="/archives/" class="btn button-narrow">Archives</a>
 	
-		<a href="/categories/" class="btn button-narrow">Categories</a>
-	
-		<a href="/tags/" class="btn button-narrow">Tags</a>
-	
-	<a href="/search.html" class="btn button-narrow" onclick="loadJQuery(this, event);" data-modal="">
-		<svg class="icon" data-icon="search"/>
+<!--
+	<a href="/search.html" class="btn button-narrow" onclick="loadJQuery(this, event);" data-modal>
+		<svg class="icon" data-icon="search"></svg>
 	</a>
+-->
 </div>
 
 			<div class="p0 col col-12">
@@ -87,6 +85,11 @@
 								//document.write('<span onclick="window.location=\'' + ' /tags/hexo/ ' + '\'" class="clickable h6 bold inline-block px1 '+chooseOne(colors)+' rounded">hexo</span>');
 							</script>
 						
+							<script type="text/javascript">
+								document.write('<a href="/tags/think/" class="muted h6 mb1 bold btn btn-outline '+chooseOne(colors)+'">think</a>');
+								//document.write('<span onclick="window.location=\'' + ' /tags/think/ ' + '\'" class="clickable h6 bold inline-block px1 '+chooseOne(colors)+' rounded">think</span>');
+							</script>
+						
 					</div>
 					<div class="ml2 right"><span class="h6 muted black">
 						<a class="link" href="/categories/hexo/">hexo</a>
@@ -97,11 +100,6 @@
 	</div>
 	
 	<div class="clearfix mt2">
-		
-			<a href="/uncategorized/2018/10/27/tags.secr3t/" class="left btn">
-			<svg class="icon" data-icon="chevron-left"/>
-			prev: tags
-		</a>
 		
 		
 		<a href="/hexo/2018/10/24/be-friendly-with-hexo.secr3t/" class="right btn">
