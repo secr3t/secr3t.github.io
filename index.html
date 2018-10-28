@@ -59,8 +59,6 @@
         
             <a href="/tags/think" class="btn"> think </a>
         
-            <a href="/tags/storage" class="btn"> storage </a>
-        
         </div>
 	</div>
 	
@@ -101,7 +99,13 @@
 <h2 id="두-번째-github에-이미지를-올려놓고-사용하자"><a href="#두-번째-github에-이미지를-올려놓고-사용하자" class="headerlink" title="두 번째 : github에 이미지를 올려놓고 사용하자"></a>두 번째 : github에 이미지를 올려놓고 사용하자</h2><p>위의 시행착오를 바탕으로 이미지를 github에 올려두고 ‘username.github.io/imgs/image.png’ 와 같은 형식으로 불러오면 어떨까 생각해보았다.<br>이런 생각을 하게 된 계기는 script 파일이나 stylesheet의 경로가 위와 같았기 때문인데, 결과는 마찬가지로 <a href="https://ko.wikipedia.org/wiki/HTTP_404" target="_blank" rel="noopener">404</a>였다.</p>
 <h2 id="세-번째-google-drive를-이용해-보자"><a href="#세-번째-google-drive를-이용해-보자" class="headerlink" title="세 번째 : google drive를 이용해 보자"></a>세 번째 : google drive를 이용해 보자</h2><p>구글 드라이브에 굉장히 친숙했던 터라, 이미지를 업로드해두고 불러올 생각까지 하게 되었다.<br>이런 식으로 말이다.<br><img src="https://api-storage.cloud.toast.com/v1/AUTH_41e5ded7cb95443f8d36cff82c6e76b3/github.io-storage/imgs/google-drive.PNG" alt="google-drive"><br>물론, google에서 제공하는 api를 사용하는 웹서버에 경우에는 원하던 그림을 그릴 수 있을 것이라 생각한다. 하지만 결과는 마찬가지였다.<br>구글 드라이브에서 이미지를 업로드한 후 공유가능한 링크를 복사하면 다음과 같은 uri가 보여진다.<br>“drive.google.com/open?id=********fq8c4cQmkskq12xLbZA-MOOL”</p>
 <p>링크만 봐도 &lt;img src.. 같은 태그로는 어림도 없을 것 같은 느낌이다.</p>
-<h2 id="네-번째-클라우드-서비스-이용-feat-NHN"><a href="#네-번째-클라우드-서비스-이용-feat-NHN" class="headerlink" title="네 번째 : 클라우드 서비스 이용(feat.NHN)"></a>네 번째 : 클라우드 서비스 이용(feat.NHN)</h2><p>어떻게 이런 생각을 하게 되었냐면, 물론 많은 사람들이 생각하겠지만 KAKAO 기술 블로그를 뒤적거리다가 하게 되었다.<br>좀 더 정확하게 말하자면 결정을 내리게 된 이유이다. 최근 KAKAO 기술 블로그는 Jekyll을 사용하는 형태로 github.io로 이주하였는데, 기술 블로그에 삽입되는 이미지 url을 자세히 보면 블로그의 url과는 완전히 다른 cdn을 사용한다. 따라서 사용하게 되었다.</p>
+<h2 id="네-번째-클라우드-서비스-이용-feat-NHN"><a href="#네-번째-클라우드-서비스-이용-feat-NHN" class="headerlink" title="네 번째 : 클라우드 서비스 이용(feat.NHN)"></a>네 번째 : 클라우드 서비스 이용(feat.NHN)</h2><p>어떻게 이런 생각을 하게 되었냐면, 물론 많은 사람들이 생각하겠지만 KAKAO 기술 블로그를 뒤적거리다가 하게 되었다.<br>좀 더 정확하게 말하자면 결정을 내리게 된 이유이다. 최근 KAKAO 기술 블로그는 Jekyll을 사용하는 형태로 github.io로 이주하였는데, 기술 블로그에 삽입되는 이미지의 host url을 자세히 보면 블로그의 host url과는 완전히 다른 cdn을 사용한다는 것을 알 수 있다.<br>그래서, 클라우드 서비스를 제공하는 기업 대표적으로 4곳을 찾아보았다. 구글, AWS, 네이버, NHN 이렇게 4곳이다. </p>
+<ul>
+<li><h3 id="구글-클라우드"><a href="#구글-클라우드" class="headerlink" title="구글 클라우드"></a>구글 클라우드</h3>그 중에서 구글 클라우드 서비스는 번역 api를 이용해본 경험이 있기 때문에(당시 기억으로 console이 굉장히 복잡함. 여전히 그러하다.) 사용하지 않았다.</li>
+<li><h3 id="AWS"><a href="#AWS" class="headerlink" title="AWS"></a>AWS</h3>사실 블로그를 구성할 때, 나는 Spring framework를 배운 기억이 있기 때문에 AWS 서버를 이용하여 deploy하고자 했었다. 하지만, 생각보다 불친절한 AWS의 장벽에 가로막혀 여기도 사용하지 않았다.</li>
+<li><h3 id="네이버-클라우드"><a href="#네이버-클라우드" class="headerlink" title="네이버 클라우드"></a>네이버 클라우드</h3>나는 네이버를 굉장히 좋아한다. 어릴 때부터 네이버에 입사해서 일을하고 싶어했다. 그 초록창.. 다이스키</li>
+<li><h3 id="NHN-클라우드-서비스"><a href="#NHN-클라우드-서비스" class="headerlink" title="NHN 클라우드 서비스"></a>NHN 클라우드 서비스</h3>하지만, 나는 NHN 클라우드 서비스인 TOAST를 선택했다. 왜냐하면 2017년 하반기, 2018년 하반기 Pre-test 1차 전형을 통과해서 그냥 기분이 좋기 때문이다.<br>사실, TOAST 서비스를 들여다 보면 일단 한국 리전의 이점과 사용자를 위한 UI 디자인을 만날 수 있다. </li>
+</ul>
 
 			</div>
 			<div class="p2 border-top">

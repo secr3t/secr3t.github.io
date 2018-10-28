@@ -152,3 +152,9 @@ img {
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+ul li h3::before,
+ul li h4::before,
+ul li h5::before {
+  content: "● ";
+}
