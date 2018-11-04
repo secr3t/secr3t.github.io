@@ -139,6 +139,8 @@
 </li>
 <li><p>aliexpress를 js 사용 없이 확인해보면 lazy - loading이 적용되어있는 것을 확인 할 수 있는데, img 태그에 image-src 라는 속성을 잠시동안 줌으로써 page의 빠른 로딩을 꾀하였다.</p>
 </li>
+<li><p>java의 (iterable.)forEach method는 for문과 같이 동작하는게 아니라서 break를 쓸 수 없다. 그래서 만든것이 RuntimeException을 상속하여 BreakException이라는 custom Exception을 내부적으로 사용했다. Exception이 발생하면 그것을 catch해 forEach구문을 탈출할 수 있게 한 것이다. 이것이 for/while loop + break 와 비교했을 때 어떤 성능저하를 불러올지는 모르겠지만, 편하게 forEach를 사용하기 위해서 꼭 필요한 존재임은 확실하다.</p>
+</li>
 </ol>
 <h2 id="COMMENT"><a href="#COMMENT" class="headerlink" title="COMMENT"></a>COMMENT</h2><p>개발에 지칠땐 포스팅이 최고인듯 하다.</p>
 
