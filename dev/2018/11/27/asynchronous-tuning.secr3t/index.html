@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+	<meta charset="utf-8">
+
+	
+
+	<title>JAVA 비동기 방식 구현 | Dev.secr3t</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+	
+	  
+    
+    <link rel="icon" href="/favicon.png">
+    
+<!--
+	<link rel="preload" href="/css/D2Coding.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="/css/D2Coding.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+	<link rel="preload" href="/css/D2CodingBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="/css/D2CodingBold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/d2coding.css" type="text/css"> -->
+	<link rel="preload" href="/css/D2Coding.woff" as="font" type="font/woff" crossorigin="anonymous">
+	<link rel="preload" href="/css/D2CodingBold.woff" as="font" type="font/woff" crossorigin="anonymous">
+	<!-- <link rel="preload" href="/css/style.css" as="style" type="text/css" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="/css/normalize.css" type="text/css">
+	<link rel="stylesheet" href="/css/basscss.css" type="text/css">
+	<link rel="stylesheet" href="/css/basscss-ui-groups.css" type="text/css">
+	<link rel="stylesheet" href="/css/tomorrow.css" type="text/css">
+	<link rel="stylesheet" href="/css/style.css" type="text/css">
+	
+		<link href="https://rachel.objectstore.co/dist/fonts/lato-v13/lato-v13-all.css" rel="stylesheet" type="text/css">
+	
+	
+
+	<!--[if lt IE 9]><script src="/js/html5.js" type="text/javascript"></script><![endif]-->
+	<script src="/js/main.js" type="text/javascript"></script>
+</head>
+</html>
+<body>
+	<section class="container m4 clearfix">
+		<div class="clearfix">
+			<div class="mb4 sm-flex center nowrap">
+	<div class="flex-auto block">
+		<a href="/" class="btn"><p class="inline h2 author">Dev.secr3t</p> | <small class="muted">Secr3t</small></a>
+	</div>
+</div>
+
+			<div class="mn1 center">
+	
+		<a href="/./" class="btn button-narrow">Home</a>
+	
+		<a href="/archives/" class="btn button-narrow">Archives</a>
+	
+	
+	<div class="dropdown">
+	    <button class="btn button-narrow">Tags</button>
+        <div class="dropdown-content">
+        
+            <a href="/tags/hexo" class="btn"> hexo </a>
+        
+            <a href="/tags/think" class="btn"> think </a>
+        
+            <a href="/tags/dev" class="btn"> dev </a>
+        
+            <a href="/tags/crawler" class="btn"> crawler </a>
+        
+            <a href="/tags/selenium" class="btn"> selenium </a>
+        
+            <a href="/tags/java" class="btn"> java </a>
+        
+            <a href="/tags/git" class="btn"> git </a>
+        
+        </div>
+	</div>
+	
+    <div class="dropdown">
+	    <button class="btn button-narrow">Categories</button>
+        <div class="dropdown-content">
+        
+            <a href="/categories/hexo" class="btn"> hexo </a>
+        
+            <a href="/categories/dev" class="btn"> dev </a>
+        
+            <a href="/categories/git" class="btn"> git </a>
+        
+        </div>
+	</div>
+<!--
+	<a href="/search.html" class="btn button-narrow" onclick="loadJQuery(this, event);" data-modal>
+		<svg class="icon" data-icon="search"></svg>
+	</a>
+-->
+</div>
+
+			<div class="p0 col col-12">
+				<div class="m0 py2">
+	<div class="md-col-12">
+		<div class="overflow-hidden bg-white rounded">
+			<div class="m1 p2 white">
+				<div class="clearfix">
+					<div class="left">
+						<h1 class="h2 m0"><a href="/dev/2018/11/27/asynchronous-tuning.secr3t/" class="black">
+						JAVA 비동기 방식 구현
+						</a></h1>
+					</div>
+					<div class="right"><span class="h6 muted black">
+						11월 27 2018
+					</span></div>
+				</div>
+			</div>
+			<div class="p2 border-top">
+				<h1 id="비동기-방식이란"><a href="#비동기-방식이란" class="headerlink" title="비동기 방식이란?"></a>비동기 방식이란?</h1><h2 id="동기-VS-비동기"><a href="#동기-VS-비동기" class="headerlink" title="동기 VS 비동기"></a>동기 VS 비동기</h2><p>비동기 방식에 대해서 이야기하기전에 동기와 비동기의 차이부터 짚고 넘어가야 할 것 같다.</p>
+<h3 id="1-동기-Synchronous-동시에-일어나는"><a href="#1-동기-Synchronous-동시에-일어나는" class="headerlink" title="1. 동기(Synchronous : 동시에 일어나는)"></a>1. 동기(Synchronous : 동시에 일어나는)</h3><p>동기는 말 그대로 동시에 일어난다는 뜻입니다. 요청과 그 결과가 동시에 일어난다는 것입니다.</p>
+<h4 id="장점"><a href="#장점" class="headerlink" title="장점"></a>장점</h4><ul>
+<li><h4 id="설계가-간단하고-직관적이다"><a href="#설계가-간단하고-직관적이다" class="headerlink" title="설계가 간단하고 직관적이다."></a>설계가 간단하고 직관적이다.</h4></li>
+</ul>
+<h4 id="단점"><a href="#단점" class="headerlink" title="단점"></a>단점</h4><ul>
+<li><h4 id="결과가-주어질-때까지-아무것도-못하고-대기해야-한다"><a href="#결과가-주어질-때까지-아무것도-못하고-대기해야-한다" class="headerlink" title="결과가 주어질 때까지 아무것도 못하고 대기해야 한다."></a>결과가 주어질 때까지 아무것도 못하고 대기해야 한다.</h4></li>
+</ul>
+<h3 id="2-비동기-Asynchronous-동시에-일어나지-않는"><a href="#2-비동기-Asynchronous-동시에-일어나지-않는" class="headerlink" title="2. 비동기(Asynchronous : 동시에 일어나지 않는)"></a>2. 비동기(Asynchronous : 동시에 일어나지 않는)</h3><p>비동기는 동시에 일어나지 않는다는 뜻입니다. 요청과 결과가 동시에 일어나지 않은것이라는 하나의 약속입니다.</p>
+<h4 id="단점-1"><a href="#단점-1" class="headerlink" title="단점"></a>단점</h4><ul>
+<li><h4 id="설계가-동기방식보다-비교적-복잡하다"><a href="#설계가-동기방식보다-비교적-복잡하다" class="headerlink" title="설계가 동기방식보다 비교적 복잡하다."></a>설계가 동기방식보다 비교적 복잡하다.</h4></li>
+</ul>
+<h4 id="장점-1"><a href="#장점-1" class="headerlink" title="장점"></a>장점</h4><ul>
+<li><h4 id="결과가-주어지는데-시간이-걸리더라도-그-시간-동안-다른-작업을-할-수-있다"><a href="#결과가-주어지는데-시간이-걸리더라도-그-시간-동안-다른-작업을-할-수-있다" class="headerlink" title="결과가 주어지는데 시간이 걸리더라도 그 시간 동안 다른 작업을 할 수 있다."></a>결과가 주어지는데 시간이 걸리더라도 그 시간 동안 다른 작업을 할 수 있다.</h4></li>
+</ul>
+<h2 id="동기-방식을-비동기-방식으로-바꾸다"><a href="#동기-방식을-비동기-방식으로-바꾸다" class="headerlink" title="동기 방식을 비동기 방식으로 바꾸다"></a>동기 방식을 비동기 방식으로 바꾸다</h2><p><a href="/dev/2018/11/03/crawler-project.secr3t/">AliExpress 크롤링프로젝트</a></p>
+<ol>
+<li><p>Issue - CPU 점유율 증가</p>
+<ul>
+<li>해당 프로젝트는 초기에 동기방식으로 설계를 진행했는데, CPU 사용량 이슈때문에 비동기방식으로 튜닝을 진행했다.</li>
+</ul>
+</li>
+<li><p>Approach - Cycle 속도를 늦춰보자</p>
+<ul>
+<li>초기 동기방식 설계의 프로그램은 평균 CPU 점유율이 50% 내외를 유지하였다. 이러한 문제 때문에, 실사용에서 프로그램을 구동중에는 다른 작업을 하기 힘들었다. 문제를 해결하기 위해서 Thread.sleep(long delay) 를 이용해서 사이클 속도를 늦추면 어떨까라는 생각에 적용 및 테스트를 진행하였는데 당연하게도 CPU 점유율은 낮아졌다. 30%내외를 유지하였으며 Main thread를 제외하고 3개의 thread가 동작하고 있기 때문에 눈에띄는 효과를 얻을 수 있었다.</li>
+</ul>
+</li>
+<li><p>Another Issue - 전체 속도 저하</p>
+<ul>
+<li>Cycle 속도 저하를 통해서 첫 번째 이슈는 처리했다. 하지만, 이 때문에 다른 문제가 생겼다. 자연스레 처리 속도까지 저하된 것이다. 하지만 처리속도를 높이자니 CPU 점유율 issue를 되돌릴 수는 없는 노릇이다.</li>
+</ul>
+</li>
+<li><p>Approach - 비동기 설계로의 튜닝</p>
+<ul>
+<li>처리 속도는 유지하면서, 점유율 문제까지 해결해보자. Java에서는 Thread에 wait과 notify라는 형태의 비동기 방식을 지원한다. <a href="https://programmers.co.kr/learn/courses/9/lessons/278" target="_blank" rel="noopener">쓰레드와 상태제어 - programmers</a> 를 참고해보면 ‘wait과 notify는 동기화된 블록안에서 사용해야 한다. wait를 만나게 되면 해당 쓰레드는 해당 객체의 <a href="http://happinessoncode.com/2017/10/04/java-intrinsic-lock/" target="_blank" rel="noopener">모니터링 락</a>에 대한 권한을 가지고 있다면 모니터링 락의 권한을 놓고 대기한다.’ </li>
+</ul>
+</li>
+</ol>
+<p>비동기 설계로 바꾼 후</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Crawler.java*/</span></span><br><span class="line">+	<span class="keyword">private</span> <span class="keyword">static</span> Crawler instance;</span><br><span class="line">    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Crawler</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		setDaemon(<span class="keyword">true</span>);</span><br><span class="line">+		instance = <span class="keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">+    	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Crawler <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">+		<span class="keyword">return</span> instance;</span><br><span class="line">+	&#125;</span><br></pre></td></tr></table></figure>
+<p>+는 Git의 commit 기록을 보며 추가된 부분을 표시한 것이다.<br>위의 Crawler.java를 보면 어딘가 친숙한 코드를 볼 수 있다. 바로 Singleton pattern이다. 좀 더 정확하게 하자면, Singleton pattern 을 변형하여 같은 코드블럭에 있지 않더라도 접근 할 수 있도록 설계를 수정한 것이다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Writer.java*/</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (crawlerAlive.get() || !crawledData.isEmpty()) &#123;</span><br><span class="line">+			<span class="keyword">synchronized</span> (Crawler.getInstance()) &#123;</span><br><span class="line">+				<span class="keyword">try</span> &#123;</span><br><span class="line">+<span class="comment">//					asynchronous control</span></span><br><span class="line">+					<span class="keyword">if</span>(crawledData.isEmpty())</span><br><span class="line">+						Crawler.getInstance().wait(<span class="number">1000</span> * <span class="number">30</span>);</span><br><span class="line">+				&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">+					e.printStackTrace();</span><br><span class="line">+				&#125;</span><br><span class="line">+			&#125;</span><br><span class="line">			Data d = crawledData.poll();</span><br><span class="line">			<span class="keyword">if</span> (d != <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">if</span> (wroteCount.get() % <span class="number">500</span> == <span class="number">0</span>)</span><br><span class="line">					copyExcel();</span><br><span class="line">				writeExcel(d);</span><br><span class="line">				wroteCount.getAndIncrement();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		writerAlive = <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+			</div>
+			<div class="p2 border-top">
+				<div class="clearfix">
+					<div class="left">
+						
+							<script type="text/javascript">
+								document.write('<a href="/tags/dev/" class="muted h6 mb1 bold btn btn-outline '+chooseOne(colors)+'">dev</a>');
+								//document.write('<span onclick="window.location=\'' + ' /tags/dev/ ' + '\'" class="clickable h6 bold inline-block px1 '+chooseOne(colors)+' rounded">dev</span>');
+							</script>
+						
+							<script type="text/javascript">
+								document.write('<a href="/tags/java/" class="muted h6 mb1 bold btn btn-outline '+chooseOne(colors)+'">java</a>');
+								//document.write('<span onclick="window.location=\'' + ' /tags/java/ ' + '\'" class="clickable h6 bold inline-block px1 '+chooseOne(colors)+' rounded">java</span>');
+							</script>
+						
+							<script type="text/javascript">
+								document.write('<a href="/tags/multithreading/" class="muted h6 mb1 bold btn btn-outline '+chooseOne(colors)+'">multithreading</a>');
+								//document.write('<span onclick="window.location=\'' + ' /tags/multithreading/ ' + '\'" class="clickable h6 bold inline-block px1 '+chooseOne(colors)+' rounded">multithreading</span>');
+							</script>
+						
+							<script type="text/javascript">
+								document.write('<a href="/tags/asynchronous/" class="muted h6 mb1 bold btn btn-outline '+chooseOne(colors)+'">asynchronous</a>');
+								//document.write('<span onclick="window.location=\'' + ' /tags/asynchronous/ ' + '\'" class="clickable h6 bold inline-block px1 '+chooseOne(colors)+' rounded">asynchronous</span>');
+							</script>
+						
+					</div>
+					<div class="ml2 right"><span class="h6 muted black">
+						<a class="link" href="/categories/dev/">dev</a>
+					 </span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="clearfix mt2">
+		
+		
+		<a href="/git/2018/11/12/private-git-bitbucket.secr3t/" class="right btn">
+			next: private-git-bitbucket
+			<svg class="icon" data-icon="chevron-right"/>
+		</a>
+		
+	</div>
+	
+	
+</div>
+
+
+			</div>
+		</div>
+	</section>
+	<div class="container mb2 clearfix">
+    <div class="sm-flex center nowrap mb2 h5">
+        <div class="flex-auto border-bottom">
+           Powered by
+            <a href="https://hexo.io/" class="btn block ">Hexo</a>
+        </div>
+        <div class="flex-auto border-bottom">
+           Original Theme
+            <a href="https://zllovesuki.git.sx/essays/2016/02/hexo-theme-weightless/" class="btn block ">Weightless</a>
+        </div>
+        <div class="flex-auto border-bottom">
+            Owner <a href="mailto:dev.secr3t@gmail.com?subject=qna-to-dev_secr3t" class="btn block author ">Dev.secr3t</a>
+        </div>
+        <div class="flex-auto border-bottom">
+            FONT <a href="https://github.com/naver/d2codingfont" class="btn block green ">Naver D2Coding</a>
+        </div>
+        
+    </div>
+</div>
+<script src="/js/geomicons.js"></script>
+<script type="text/javascript">
+    var icons = document.querySelectorAll('[data-icon]');
+    geomicons.inject(icons);
+
+</script>
+
+
+
+</body>
+</html>
